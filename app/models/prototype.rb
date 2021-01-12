@@ -1,5 +1,9 @@
 class Prototype < ApplicationRecord
-  belong_to :user
+  belongs_to :user
   has_many :comments
   has_one_attached :image
+
+  validates :title presence: true
+  validates :catch_copy, presences: true
+  validates :concept, presence: true
 end
