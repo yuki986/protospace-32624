@@ -7,13 +7,18 @@ class PrototypesController < ApplicationController
     @prototype = Prototype.new
   end
 
-  def cleate
+  def create
     prototype.create(prototype_params)
+    if @prototype.save
+      redirect_to root_path
+    else
+      render :new
+    end
   end
 
   private
   def prototype_params
-    params.require(:prototype).permit(:title, :catch_copy, :concept, :image)
+    params.require(:prototype).permit(:title, :catch_copy, :concept, :image).marge(user_id: current_user.id)
   end
 
 end
